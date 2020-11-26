@@ -1,0 +1,50 @@
+﻿<Window x:Class="Practice.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Practice" 
+        xmlns:viewmodels="clr-namespace:Practice.ViewModels"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="1100">
+    <Window.DataContext>
+        <viewmodels:MainWindowVM></viewmodels:MainWindowVM>
+    </Window.DataContext>
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Menu Grid.Row="0" Margin="0,0,0,0" Background="White">
+            <MenuItem Header="Student">
+                <MenuItem Header="Students list"/>
+                <MenuItem Header="Create new student" Command="{Binding Path=NewStudentMenu}"/>
+                <MenuItem Header="Delete student" Command="{Binding Path=DeleteStudent}"/>
+            </MenuItem>
+            <MenuItem Header="Class"/>
+            <MenuItem Header="Help"/>
+        </Menu>
+
+        <Border Grid.Row="1" BorderThickness="0,0,0,3" BorderBrush="Black" Margin="0,0,0,5" Background="#FFFF54D6"/>
+        <TextBlock Grid.Row="1" Text="Student List" FontSize="24" Margin="10,0,10,10" HorizontalAlignment="Center" Width="136"/>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300*"></ColumnDefinition>
+                <ColumnDefinition Width="150*"></ColumnDefinition>
+                <ColumnDefinition Width="100*"></ColumnDefinition>
+                <ColumnDefinition Width="100*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <TextBox Grid.Column="0" Margin="5,5,10,5" TextWrapping="NoWrap" Text="{Binding Path=ContentSearchBox}"/>
+            <ComboBox Grid.Column="1" Margin="10,5,10,5" Name="Class" ItemsSource="{Binding Path=ClassList}" SelectedItem="{Binding Path=ClassSelected}"/>
+            <Button Grid.Column="2" Content="Search" Margin="10,5,10,5" Background="#FFFF17CA" Command="{Binding ButtonSearch}"/>
+            <Button Grid.Column="3" Content="Reset" Margin="10,5,5,5" Background="#FFFF17CA" Command="{Binding ButtonReset}"/>
+        </Grid>
+        <DataGrid Grid.Column="3" Grid.Row="3" ItemsSource="{Binding Path=StudentList}" SelectedValue="{Binding Path=SelectStudent}"/>
+    </Grid>
+</Window>
